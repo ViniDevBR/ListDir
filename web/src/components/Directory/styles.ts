@@ -19,9 +19,7 @@ export const ContainerNames = styled.div`
   align-items: center;
 `
 
-export const Arrow = styled.div`
-
-`
+export const Arrow = styled.div``
 
 export const EmptyBox = styled.div`
   width: 40px;
