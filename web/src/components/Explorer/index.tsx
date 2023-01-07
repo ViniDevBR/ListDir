@@ -12,11 +12,16 @@ export function Explorer() {
     if(!subDirectory){
       return
     }
-    
+
     if(!subDirectories[0]) {
       setSubDirectory(prev => prev.concat(subDirectory))
     } else {
-      setSubDirectory([])
+      setSubDirectory(prev => {
+        const item = [prev]
+        const data = item[0] = subDirectory
+
+        return data
+      })
     }
   }
 
