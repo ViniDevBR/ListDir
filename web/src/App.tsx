@@ -10,7 +10,7 @@ interface IFiles {
   kind: string
 }
 export function App() {
-  const [cardFile, setCardFile] = useState<IFiles[]>([])
+  //const [cardFile, setCardFile] = useState<IFiles[]>([])
 
   // async function handleUploadFile() {
   //   const dirHandle = await window.showDirectoryPicker()
@@ -20,12 +20,6 @@ export function App() {
   //   }
   // }
 
-
-
-  useEffect(() => {
-    console.log(cardFile)
-  },[cardFile])
-  
   return (
     <>
       <GlobalStyles />

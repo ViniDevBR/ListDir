@@ -20,6 +20,10 @@ export const API = [
       {
         name: 'Provas.xlsx',
         kind: 'file'
+      },
+      {
+        name: 'Compras.xlsx',
+        kind: 'file'
       }
     ]
   },

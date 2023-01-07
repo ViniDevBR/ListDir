@@ -2,11 +2,15 @@ import { DirectoryContainer, EmptyBox, ContainerNames, Arrow } from './styles'
 import { CaretRight, FolderSimple  } from 'phosphor-react'
 import { IFiles } from '../../@types/Files'
 
-export function Directory(props: IFiles) {
+interface IProps extends IFiles {
+  onFiles: (subDirectory: IFiles[] | undefined) => void
+}
+
+export function Directory({onFiles, directory, ...props}: IProps) {
   return (
-    <DirectoryContainer>
+    <DirectoryContainer onClick={() => onFiles(directory)}>
       <ContainerNames>
-        {props.directory ? (
+        {directory ? (
           <FolderSimple  size={40} color='#fff' weight='duotone' />
         ) : (
           <EmptyBox />
@@ -15,7 +19,11 @@ export function Directory(props: IFiles) {
       </ContainerNames>
 
       <Arrow>
-        <CaretRight size={40} color="#fff" weight="bold" />
+        {directory ? (
+          <CaretRight size={40} color="#fff" weight="bold" />
+        ) : (
+          <EmptyBox />
+        )}
       </Arrow>
     </DirectoryContainer>
   )
