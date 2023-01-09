@@ -17,47 +17,33 @@ export function App() {
     const out: IFiles[] = []
     const dirHandle = await window.showDirectoryPicker()
 
-    await handleDirectoryEntry2(dirHandle, out)
-   
+    await handleDirectoryEntry(dirHandle, out)
+
     console.log(out)
   }
 
-  // async function handleDirectoryEntry( dirHandle: any, out: any ) {
-  //   for await (const entry of dirHandle.values()) {
-
-  //     if (entry.kind === 'file'){
-  //       const data: IFiles = new Object()
-  //       const file = await entry.getFile()
-  //       data.name = file.name
-  //       data.kind = entry.kind
-  //       await out.push(data)
-  //     }
-
-  //     if (entry.kind === 'directory') {
-  //       const newHandle = await dirHandle.getDirectoryHandle( entry.name, { create: false })
-
-  //       const data: IFiles = new Object()
-  //       data.name = entry.name
-  //       data.kind = entry.kind
-
-  //       await out.push(data)
-  //       const newOut: IFiles = []
-
-  //       await handleDirectoryEntry( newHandle, newOut )
-  //     }
-  //   }
-  // }
-
-  async function handleDirectoryEntry2( dirHandle: any, out: any ) {
+  async function handleDirectoryEntry( dirHandle: any, out: any ) {
     for await (const entry of dirHandle.values()) {
+
       if (entry.kind === 'file'){
+        const data: IFiles = new Object()
         const file = await entry.getFile()
-        out[ file.name ] = file
+        data.name = file.name
+        data.kind = entry.kind
+        await out.push(data)
       }
+
       if (entry.kind === 'directory') {
-        const newHandle = await dirHandle.getDirectoryHandle( entry.name, { create: false } )
-        const newOut = out[ entry.name ] = {}
-        await handleDirectoryEntry2( newHandle, newOut )
+        const newHandle = await dirHandle.getDirectoryHandle( entry.name, { create: false })
+
+        const data: IFiles = new Object()
+        data.name = entry.name
+        data.kind = entry.kind
+
+        await out.push(data)
+        const newOut: IFiles = []
+
+        //await handleDirectoryEntry( newHandle, newOut )
       }
     }
   }
